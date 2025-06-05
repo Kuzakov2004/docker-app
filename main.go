@@ -39,6 +39,16 @@ func main() {
         randomResult.SetText(fmt.Sprintf("Число: %d", num))
     })
 
+	    // 3. Подбрасывание монетки
+    coinResult := widget.NewLabel("Монетка: -")
+    coinButton := widget.NewButton("Подбросить монетку", func() {
+        rand.Seed(time.Now().UnixNano())
+        side := "Орёл"
+        if rand.Intn(2) == 1 {
+            side = "Решка"
+        }
+        coinResult.SetText("Монетка: " + side)
+    })
 
 
     // Собираем интерфейс
@@ -52,6 +62,9 @@ func main() {
         randomButton,
         randomResult,
 
+		widget.NewLabel("=== Подбрасывание монетки ==="),
+        coinButton,
+        coinResult,
 
     )
 
