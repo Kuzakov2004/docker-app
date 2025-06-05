@@ -31,7 +31,7 @@ func main() {
         }
     })
 
-    // 2. Генератор случайного числа (1-10)
+        // 2. Генератор случайного числа (1-10)
     randomResult := widget.NewLabel("Число: -")
     randomButton := widget.NewButton("Случайное число (1-10)", func() {
         rand.Seed(time.Now().UnixNano())
