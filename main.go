@@ -32,11 +32,11 @@ func main() {
     })
 
         // 2. Генератор случайного числа (1-10)
-    randomResult := widget.NewLabel("Число: -")
+    random := widget.NewLabel("Число: -")
     randomButton := widget.NewButton("Случайное число (1-10)", func() {
         rand.Seed(time.Now().UnixNano())
         num := rand.Intn(10) + 1
-        randomResult.SetText(fmt.Sprintf("Число: %d", num))
+        random.SetText(fmt.Sprintf("Число: %d", num))
     })
 
 	    // 3. Подбрасывание монетки
