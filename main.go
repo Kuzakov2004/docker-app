@@ -3,8 +3,8 @@ package main
 import (
     "fmt"
     "math/rand"
+    "strconv"
     "time"
-
 
     "fyne.io/fyne/v2"
     "fyne.io/fyne/v2/app"
@@ -31,7 +31,7 @@ func main() {
         }
     })
 
-        // 2. Генератор случайного числа (1-10)
+    // 2. Генератор случайного числа (1-10)
     randomResult := widget.NewLabel("Число: -")
     randomButton := widget.NewButton("Случайное число (1-10)", func() {
         rand.Seed(time.Now().UnixNano())
@@ -39,7 +39,7 @@ func main() {
         randomResult.SetText(fmt.Sprintf("Число: %d", num))
     })
 
-	    // 3. Подбрасывание монетки
+    // 3. Подбрасывание монетки
     coinResult := widget.NewLabel("Монетка: -")
     coinButton := widget.NewButton("Подбросить монетку", func() {
         rand.Seed(time.Now().UnixNano())
@@ -50,6 +50,22 @@ func main() {
         coinResult.SetText("Монетка: " + side)
     })
 
+    // 4. Проверка чётности числа
+    evenEntry := widget.NewEntry()
+    evenEntry.SetPlaceHolder("Введите число")
+    evenResult := widget.NewLabel("Чётность: -")
+    evenButton := widget.NewButton("Проверить чётность", func() {
+        num, err := strconv.Atoi(evenEntry.Text)
+        if err != nil {
+            evenResult.SetText("Ошибка: введите число!")
+        } else {
+            if num%2 == 0 {
+                evenResult.SetText("Чётность: Чётное")
+            } else {
+                evenResult.SetText("Чётность: Нечётное")
+            }
+        }
+    })
 
     // Собираем интерфейс
     content := container.NewVBox(
@@ -62,10 +78,14 @@ func main() {
         randomButton,
         randomResult,
 
-		widget.NewLabel("=== Подбрасывание монетки ==="),
+        widget.NewLabel("=== Подбрасывание монетки ==="),
         coinButton,
         coinResult,
 
+        widget.NewLabel("=== Проверка чётности ==="),
+        evenEntry,
+        evenButton,
+        evenResult,
     )
 
     myWindow.SetContent(content)
@@ -95,5 +115,4 @@ func eval(expr string) (float64, error) {
     }
     return 0, fmt.Errorf("неверное выражение")
 }
-
 
