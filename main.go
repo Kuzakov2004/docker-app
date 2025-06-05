@@ -2,7 +2,8 @@ package main
 
 import (
     "fmt"
-
+    "math/rand"
+    "time"
 
 
     "fyne.io/fyne/v2"
@@ -30,7 +31,13 @@ func main() {
         }
     })
 
-
+        // 2. Генератор случайного числа (1-10)
+    randomResult := widget.NewLabel("Число: -")
+    randomButton := widget.NewButton("Случайное число (1-10)", func() {
+        rand.Seed(time.Now().UnixNano())
+        num := rand.Intn(10) + 1
+        randomResult.SetText(fmt.Sprintf("Число: %d", num))
+    })
 
 
 
@@ -40,6 +47,10 @@ func main() {
         calcEntry,
         calcButton,
         calcResult,
+
+        widget.NewLabel("=== Генератор случайного числа ==="),
+        randomButton,
+        randomResult,
 
 
     )
