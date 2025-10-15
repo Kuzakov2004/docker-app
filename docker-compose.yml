@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  go-app:
+    build: .
+    ports:
+      - "8080:8080"
+    volumes:
+      - app_data:/app/data  
+    restart: unless-stopped
+
+volumes:
+  app_data:  
